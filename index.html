@@ -2,6 +2,7 @@
 
 <html>
 <script src='https://d3js.org/d3.v5.min.js'></script>
+<script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
 <style> rect {fill: lightblue; stroke: black;}</style>
 <svg width=300 height=300></svg>
 <script>
@@ -29,5 +30,26 @@ d3.select("svg")
  .append("g")
    .attr("transform","translate("+50+","+(200+50)+")")
    .call(d3.axisBottom(x));
+
+// Features of the annotation
+const annotations = [
+  {
+    note: {
+      label: "Here is the annotation label",
+      title: "Annotation title"
+    },
+    x: 100,
+    y: 100,
+    dy: 100,
+    dx: 100
+  }
+]
+
+// Add annotation to the chart
+const makeAnnotations = d3.annotation()
+  .annotations(annotations)
+d3.select("svg")
+  .append("g")
+  .call(makeAnnotations)
 </script>
 </html>
