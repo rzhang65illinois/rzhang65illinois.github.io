@@ -4,7 +4,7 @@
 <script src='https://d3js.org/d3.v5.min.js'></script>
 <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
 <style> rect {fill: lightblue; stroke: black;}</style>
-<svg width=300 height=300></svg>
+<svg width=500 height=500></svg>
 <script>
 var data = [4,8,15,16,23,42];
 var x = d3.scaleBand().domain([0,1,2,3,4,5]).range([0,200]);
@@ -46,8 +46,7 @@ const annotations = [
 ]
 
 // Add annotation to the chart
-const makeAnnotations = d3.annotation()
-  .annotations(annotations)
+const makeAnnotations = d3.annotation().annotations(annotations)
 d3.select("svg")
   .append("g")
   .call(makeAnnotations)
