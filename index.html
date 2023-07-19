@@ -31,7 +31,7 @@ d3.csv("https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.gith
 	console.log(+data.US)
     // Add X axis --> it is a date format
     var x = d3.scaleTime()
-      .domain(d3.extent(data, function(d) { return d.time; }))
+      .domain(d3.extent(data.time))
       .range([0, width]);
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
@@ -39,7 +39,7 @@ d3.csv("https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.gith
     
     // Add Y axis
     var y = d3.scaleLinear()
-      .domain([0, d3.max(data, function(d) { return +d.US; })])
+      .domain([0, d3.max(+data.US)])
       .range([height, 0]);
     svg.append("g")
       .call(d3.axisLeft(y));
