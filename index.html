@@ -20,16 +20,16 @@ var svg = d3.select("#cs416")
 d3.csv("https://github.com/rzhang65illinois/rzhang65illinois.github.io/blob/main/Covid_time_series.csv",
 
   // When reading the csv, I must format variables:
-  //function(d){
-  //  return { date : d3.timeParse("%Y-%m-%d")(d.time), value : d.value }
-  //},
+  function(d){
+    return { time : d3.timeParse("%m/%d/%Y")(d.time), US : d.US }
+  },
 
   // Now I can use this dataset:
   function(data) {
 
     // Add X axis --> it is a date format
     var x = d3.scaleTime()
-      .domain(d3.extent(data, function(d) { return d3.timeParse("%Y-%m-%d")(d.time); }))
+      .domain(d3.extent(data, function(d) { return d.time; }))
       .range([0, width]);
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
