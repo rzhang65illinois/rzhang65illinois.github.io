@@ -1,21 +1,15 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
 
-<!-- Load d3.js -->
-<script src="https://d3js.org/d3.v4.js"></script>
-
-<!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
+<html>
+<script src='https://d3js.org/d3.v5.min.js'></script>
+<script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
+<div id="cs416"></div>
 
 <script>
-
-// set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
-
-// append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
+var margin = {top: 30, right: 50, bottom: 30, left: 50},
+    width = 600 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
+var svg = d3.select("#cs416")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -23,35 +17,34 @@ var svg = d3.select("#my_dataviz")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
-//Read the data
-d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv",
+d3.csv("https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/Covid_time_series.csv",
 
-  // When reading the csv, I must format variables:
   function(d){
-    return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.value }
+   return { time : d3.timeParse("%m/%d/%Y")(d.time), US : +d.US }
   },
 
-  // Now I can use this dataset:
   function(data) {
-    console.log(d3.extent(data, function(d) { return d.date; }));
-    console.log(d3.max(data, function(d) { return +d.value; }));
-    console.log(data.date);
-    console.log(+data.value);
+    //time2 = d3.timeParse("%m/%d/%Y")("1/22/2020");
+  //console.log("start");
+  console.log(d3.extent(data, function(d) { return d.time; }));
+  console.log(d3.max(data, function(d) { return d.US; }));
+  console.log(data.time);
+  console.log(data.US);
     // Add X axis --> it is a date format
     var x = d3.scaleTime()
-      .domain(d3.extent(data, function(d) { return d.date; }))
-      .range([ 0, width ]);
+      .domain(d3.extent(data.time))
+      .range([0, width]);
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
-
+    
     // Add Y axis
     var y = d3.scaleLinear()
-      .domain([0, d3.max(data, function(d) { return +d.value; })])
-      .range([ height, 0 ]);
+      .domain([0, d3.max(+data.US)])
+      .range([height, 0]);
     svg.append("g")
       .call(d3.axisLeft(y));
-
+    
     // Add the line
     svg.append("path")
       .datum(data)
@@ -59,10 +52,30 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
       .attr("stroke", "steelblue")
       .attr("stroke-width", 1.5)
       .attr("d", d3.line()
-        .x(function(d) { return x(d.date) })
-        .y(function(d) { return y(d.value) })
+        .x(function(d) { return x(d.time) })
+        .y(function(d) { return y(+d.US) })
         )
 
 })
 
+// Features of the annotation
+const annotations = [
+  {
+    note: {
+      label: "Here is the annotation label 2",
+      title: "Annotation title"
+    },
+    x: 100,
+    y: 100,
+    dy: 100,
+    dx: 100
+  }
+]
+
+// Add annotation to the chart
+const makeAnnotations = d3.annotation().annotations(annotations)
+d3.select("svg")
+  .append("g")
+  .call(makeAnnotations)
 </script>
+</html>
