@@ -6,9 +6,9 @@
 <div id="cs416"></div>
 
 <script>
-var margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 800 - margin.left - margin.right,
-    height = 800 - margin.top - margin.bottom;
+var margin = {top: 30, right: 50, bottom: 30, left: 50},
+    width = 600 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
 var svg = d3.select("#cs416")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -17,7 +17,7 @@ var svg = d3.select("#cs416")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
-d3.csv("https://github.com/rzhang65illinois/rzhang65illinois.github.io/blob/main/Covid_time_series.csv",
+d3.csv("https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/Covid_time_series.csv",
 
   // When reading the csv, I must format variables:
   function(d){
