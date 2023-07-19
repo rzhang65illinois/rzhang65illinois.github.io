@@ -20,11 +20,14 @@ var svg = d3.select("#cs416")
 d3.csv("https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/Covid_time_series.csv",
 
   function(d){
-    return { time : d3.timeParse("%m/%d/%Y")(d.time), US : d.US }
+   return { time : d3.timeParse("%m/%d/%Y")(d.time), US : d.US }
   },
 
   function(data) {
-  	console.log(function(data));
+  	time2 = d3.timeParse("%m/%d/%Y")("1/22/2020");
+	console.log(time2);
+  	time2 = d3.utcParse("%m/%d/%Y")("1/22/2020");
+	console.log(time2);
     // Add X axis --> it is a date format
     var x = d3.scaleTime()
       .domain(d3.extent(data, function(d) { return d.time; }))
