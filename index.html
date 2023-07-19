@@ -26,7 +26,7 @@ d3.csv("https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.gith
 
   // Now I can use this dataset:
   function(data) {
-
+    console.log(data);
     // Add X axis --> it is a date format
     var x = d3.scaleTime()
       .domain(d3.extent(data, function(d) { return d.time; }))
@@ -59,7 +59,7 @@ d3.csv("https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.gith
 const annotations = [
   {
     note: {
-      label: "Here is the annotation label",
+      label: "Here is the annotation label 2",
       title: "Annotation title"
     },
     x: 100,
