@@ -25,10 +25,10 @@ d3.csv("https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.gith
 
   function(data) {
   	//time2 = d3.timeParse("%m/%d/%Y")("1/22/2020");
-	console.log("start");
+	//console.log("start");
 	console.log(d3.extent(data, function(d) { return d.time; }));
 	console.log(d3.max(data, function(d) { return +d.US; }));
-	console.log(+data.US)
+	console.log(+data.time)
     // Add X axis --> it is a date format
     var x = d3.scaleTime()
       .domain(d3.extent(data.time))
@@ -52,7 +52,7 @@ d3.csv("https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.gith
       .attr("stroke-width", 1.5)
       .attr("d", d3.line()
         .x(function(d) { return x(d.time) })
-        .y(function(d) { return y(d.US) })
+        .y(function(d) { return y(+d.US) })
         )
 
 })
