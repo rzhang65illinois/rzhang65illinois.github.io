@@ -62,10 +62,9 @@ d3.csv("https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.gith
     var circles = svg.selectAll('circle')
     .data(data).enter()
     .append('circle')
-    .attr('x', function(d) { return d.time })
-    .attr('y', 400)
-    .attr('width', 10)
-    .attr('height', 10)
+    .attr('cx', function(d) { return d.time })
+    .attr('cy', 400)
+    .attr('r', 10)
 
     circles.on("mouseover", function(d) {
       d3.select(this)
