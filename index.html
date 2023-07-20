@@ -54,10 +54,11 @@ d3.csv("https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.gith
   function(d){
    return { time : d3.timeParse("%m/%d/%Y")(d.time), event : d.event }
   },
-  console.log(d.time)
-  console.log(d.event)
 
   function(data) {
+    console.log(data.time);
+    console.log(data.event);
+
     var circles = chart.selectAll('circle')
     .data(data).enter()
     .append('circle')
