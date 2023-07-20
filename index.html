@@ -54,13 +54,15 @@ d3.csv("https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.gith
   function(d){
    return { time : d3.timeParse("%m/%d/%Y")(d.time), event : d.event }
   },
-  
+  console.log(d.time)
+  console.log(d.event)
+
   function(data) {
     var circles = chart.selectAll('circle')
     .data(data).enter()
     .append('circle')
     .attr('x', function(d) { return d.time })
-    .attr('y', function(d,i) {return height - i * 15})
+    .attr('y', 400)
     .attr('width', 10)
     .attr('height', 10)
 
