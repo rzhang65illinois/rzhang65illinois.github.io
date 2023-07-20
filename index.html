@@ -42,9 +42,7 @@ async function main() {
     .range([height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
-  const interp = d3.scaleLinear()
-    .domain(function(d) { return d.time; })
-    .range(function(d) { return d.US; }); 
+
   svg.append("path")
       .datum(data)
       .attr("fill", "none")
@@ -59,10 +57,15 @@ async function main() {
     "https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/Covid_events.csv",
     function(d){return { time : d3.timeParse("%-d-%b-%y")(d.time), event : +d.event }});
   console.log(event[0]);
+  const time = [array(data)]; function array(d) { return d.time; }
+  const num = [array(data)]; function array(d) { return d.US; }
+  const interp = d3.scaleLinear()
+    .domain(time)
+    .range(num); 
   var circles = svg.selectAll('circle')
     .data(event).enter()
     .append('circle')
-    .attr('cx', function(d) { return x(d.time) })
+    .attr('cx', function(d) { return interp(d.time) })
     .attr('cy', 400)
     .attr('r', 5)
     .attr("fill" , "black");
