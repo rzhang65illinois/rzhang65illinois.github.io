@@ -6,7 +6,7 @@
 <div id="cs416"></div>
 
 <script>
-var margin = {top: 30, right: 30, bottom: 30, left: 30},
+var margin = {top: 30, right: 50, bottom: 30, left: 50},
     width = 800 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
 var svg = d3.select("#cs416")
@@ -56,13 +56,10 @@ d3.csv("https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.gith
   },
 
   function(data) {
-    console.log(data.time);
-    console.log(data.event);
-
     var circles = svg.selectAll('circle')
     .data(data).enter()
     .append('circle')
-    .attr('cx', function(d) { return d.time })
+    .attr('cx', function(d) { return x(d.time) })
     .attr('cy', 400)
     .attr('r', 10)
 
