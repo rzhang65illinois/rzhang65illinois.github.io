@@ -25,7 +25,7 @@ d3.csv("https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.gith
 
   function(data) {
     var x = d3.scaleTime()
-      .domain([Date(2021, 0, 20), Date(2021, 11, 31)])//.domain(d3.extent(data, function(d) { return d.time; }))
+      .domain(d3.extent(data, function(d) { return d.time; }))
       .range([0, width]);
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
@@ -49,6 +49,32 @@ d3.csv("https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.gith
 
 })
 
+d3.csv("https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/Covid_events.csv",
+
+  function(d){
+   return { time : d3.timeParse("%m/%d/%Y")(d.time), event : d.event }
+  },
+  
+  function(data) {
+    var circles = chart.selectAll('circle')
+    .data(data).enter()
+    .append('circle')
+    .attr('x', function(d) { return d.time })
+    .attr('y', function(d,i) {return height - i * 15})
+    .attr('width', 10)
+    .attr('height', 10)
+
+    circles.on("mouseover", function(d) {
+      d3.select(this)
+        .attr("fill" , "red")
+    })
+
+    circles.on("mouseout", function(d) {
+      d3.select(this)
+        .attr("fill" , "gray")
+    })
+  }
+)
 // Features of the annotation
 const annotations = [
   {

@@ -1,4 +1,4 @@
-31-Dec-19,"Cases of pneumonia detected in Wuhan, China, are first reported to WHO. During this reported period, the virus is unknown. The cases occur between December 12 and December 29, according to Wuhan Municipal Health."
+time,event
 1-Jan-20,Chinese health authorities close the Huanan Seafood Wholesale Market after it is discovered that wild animals sold there may be the source of the virus.
 5-Jan-20,"China announces that the unknown pneumonia cases in Wuhan are not SARS or MERS. In a statement, the Wuhan Municipal Health Commission says a retrospective probe into the outbreak has been initiated."
 7-Jan-20,"Chinese authorities confirm that they have identified the virus as a novel coronavirus, initially named 2019-nCoV by WHO."
@@ -81,25 +81,3 @@
 10-Dec-20,Vaccine advisers to the FDA vote to recommend the agency grant emergency use authorization to Pfizer and BioNTech’s coronavirus vaccine.
 14-Dec-20,"US officials announce the first doses of the FDA authorized Pfizer vaccine have been delivered to all 50 states, the District of Columbia and Puerto Rico."
 18-Dec-20,"The FDA authorizes a second coronavirus vaccine made by Moderna for emergency use. “The emergency use authorization allows the vaccine to be distributed in the U.S. for use in individuals 18 years and older,” the FDA said in a tweet."
-14-Jan-21,The WHO team tasked with investigating the origins of the outbreak in Wuhan arrive in China.
-20-Jan-21,Newly elected US President Joe Biden halts the United States’ withdrawal from WHO.
-22-Feb-21,"The death toll from Covid-19 exceeds 500,000 in the United States."
-27-Feb-21,"The FDA grants emergency use authorization to Johnson & Johnson’s Covid-19 vaccine, the first single dose Covid-19 vaccine available in the US."
-30-Mar-21,"According to a 120-page report from WHO, the novel coronavirus that causes Covid-19 probably spread to people through an animal, and probably started spreading among humans no more than a month or two before it was noticed in December of 2019. The report says a scenario where it spread via an intermediate animal host, possibly a wild animal captured and then raised on a farm, is “very likely.”"
-17-Apr-21,"The global tally of deaths from Covid-19 surpasses 3 million, according to data compiled by Johns Hopkins."
-3-Aug-21,"According to figures published by the CDC, the more contagious Delta variant accounts for an estimated 93.4% of coronavirus circulating in the United States during the last two weeks of July. The figures show a rapid increase over the past two months, up from around 3% in the two weeks ending May 22."
-12-Aug-21,The FDA authorizes an additional Covid-19 vaccine dose for certain immunocompromised people.
-23-Aug-21,"The FDA grants full approval to the Pfizer/BioNTech Covid-19 vaccine for people age 16 and older, making it the first coronavirus vaccine approved by the FDA."
-24-Sep-21,"CDC Director Dr. Rochelle Walensky diverges from the agency’s independent vaccine advisers to recommend boosters for a broader group of people – those ages 18 to 64 who are at increased risk of Covid-19 because of their workplaces or institutional settings – in addition to older adults, long-term care facility residents and some people with underlying health conditions."
-2-Nov-21,"Walensky says she is endorsing a recommendation to vaccinate children ages 5-11 against Covid-19, clearing the way for immediate vaccination of the youngest age group yet in the US."
-19-Nov-21,"The FDA authorizes boosters of the Pfizer/BioNTech and Moderna Covid-19 vaccines for all adults. The same day, the CDC also endorses boosters for all adults."
-16-Dec-21,The CDC changes its recommendations for Covid-19 vaccines to make clear that shots made by Moderna and Pfizer/BioNTech are preferred over Johnson & Johnson’s vaccine.
-22-Dec-21,"The FDA authorizes Pfizer’s antiviral pill, Paxlovid, to treat Covid-19, the first antiviral Covid-19 pill authorized in the United States for ill people to take at home, before they get sick enough to be hospitalized. The following day, the FDA authorizes Merck’s antiviral pill, molnupiravir."
-27-Dec-21,The CDC shortens the recommended times that people should isolate when they’ve tested positive for Covid-19 from 10 days to five days if they don’t have symptoms – and if they wear a mask around others for at least five more days. The CDC also shortens the recommended time for people to quarantine if they are exposed to the virus to a similar five days if they are vaccinated.
-31-Jan-22,The FDA grants full approval to Moderna’s Covid-19 vaccine for those ages 18 and older. This is the second coronavirus vaccine given full approval by the FDA.
-29-Mar-22,"The FDA authorizes a second booster of the Pfizer/BioNTech and Moderna Covid-19 vaccines for adults 50 and older. That same day, the CDC also endorses a second booster for the same age group."
-25-Apr-22,The FDA expands approval of the drug remdesivir to treat patients as young as 28 days and weighing about seven pounds.
-17-May-22,"The FDA authorizes a booster dose of Pfizer/BioNTech’s Covid-19 vaccine for children ages 5 to 11 at least five months after completion of the primary vaccine series. On May 19, the CDC also endorses a booster dose for the same age group."
-18-Jun-22,The CDC recommends Covid-19 vaccines for children as young as 6 months.
-31-Aug-22,The FDA authorizes updated Covid-19 vaccine booster shots from Moderna and Pfizer. Both are bivalent vaccines that combine the companies’ original vaccine with one that targets the BA.4 and BA.5 Omicron sublineages. The CDC signs off on the updated booster shots the following day.
-5-May-23,The WHO says Covid-19 is no longer a global health emergency.
