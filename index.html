@@ -59,7 +59,7 @@ d3.csv("https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.gith
     console.log(data.time);
     console.log(data.event);
 
-    var circles = chart.selectAll('circle')
+    var circles = svg.selectAll('circle')
     .data(data).enter()
     .append('circle')
     .attr('x', function(d) { return d.time })
