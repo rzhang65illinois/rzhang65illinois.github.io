@@ -4,8 +4,9 @@
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
 <body onload="main()">
-
-<script>  
+<button type="button" onclick="location.href = 'www.google.com';" id="2021">2021</button>
+<button type="button" onclick="location.href = 'www.yoursite.com';" id="2022">2022</button>
+<script>
 async function main() {
   const data = await d3.csv(
     "https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/Covid_time_series.csv",
@@ -27,10 +28,13 @@ async function main() {
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x));
   const y = d3.scaleLinear()
-    .domain([0, d3.max(data, function(d) { return +d.US; })])
+    .domain([0, d3.max(data, function(d) { return d.US; })])
     .range([height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
+  const interp = d3.scaleLinear()
+    .domain(function(d) { return d.time; })
+    .range(function(d) { return d.US; }); 
   svg.append("path")
       .datum(data)
       .attr("fill", "none")
@@ -50,7 +54,8 @@ async function main() {
     .append('circle')
     .attr('cx', function(d) { return x(d.time) })
     .attr('cy', 400)
-    .attr('r', 5);
+    .attr('r', 5)
+    .attr("fill" , "black");
   circles.on("mouseover", function(d) {
     d3.select(this)
       .attr("fill" , "red")
