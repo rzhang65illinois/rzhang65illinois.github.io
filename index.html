@@ -20,16 +20,16 @@ var svg = d3.select("#cs416")
 d3.csv("https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/Covid_time_series.csv",
 
   function(d){
-   return { time : d3.timeParse("%m/%d/%Y")(d.time), US : +d.US }
+   return { time : d3.timeParse("%m/%d/%Y")(d.time), US : d.US }
   },
 
   function(data) {
     //time2 = d3.timeParse("%m/%d/%Y")("1/22/2020");
   //console.log("start");
   console.log(d3.extent(data, function(d) { return d.time; }));
-  console.log(d3.max(data, function(d) { return d.US; }));
+  console.log(d3.max(data, function(d) { return +d.US; }));
   console.log(data.time);
-  console.log(data.US);
+  console.log(+data.US);
     // Add X axis --> it is a date format
     var x = d3.scaleTime()
       .domain(d3.extent(data.time))
