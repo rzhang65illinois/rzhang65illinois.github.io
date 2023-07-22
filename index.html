@@ -76,34 +76,53 @@ async function main() {
     .attr('r', 10)
     .attr("stroke", "red")
     .attr("stroke-width", 1)
-    .attr("stroke-dasharray", ("6,2"))
+    .attr("stroke-dasharray", ("3,1"))
     .attr("fill" , "rgba(255, 0, 0, 0.33)");
-  const annotations = [
-  {
-    note: { label: "Hi" },
-    x: 100,
-    y: 100,
-    dy: 137,
-    dx: 162,
-    subject: { radius: 50, radiusPadding: 10 },
-  },
-  ];
-  const makeAnnotations = d3.annotation().annotations(annotations)
-  d3.select("svg")
-    .append("g")
-    .call(makeAnnotations)
-d3.annotation().annotations(annotations);
+
   circles.on("mouseover", function(d) {
     d3.select(this)
       .attr("fill" , "rgba(255, 0, 0, 0.66)")
-    d3.select("svg")
-      .append("g")
-      .call(makeAnnotations)
   });
   circles.on("mouseout", function(d) {
     d3.select(this)
       .attr("fill" , "rgba(255, 0, 0, 0.33)")
   });
+  const type = d3.annotationCalloutCircle
+
+  const annotations = [{
+    note: {
+      label: "Longer text to show text wrapping",
+      title: "Annotations :)"
+    },
+    data: { date: "18-Sep-20", close: 4000000 },
+    dy: 40,
+    dx: 40,
+    subject: {
+      radius: 10,
+      radiusPadding: 5
+    }
+  }]
+
+  const parseTime = d3.timeParse("%d-%b-%y")
+  const timeFormat = d3.timeFormat("%d-%b-%y")
+  const makeAnnotations = d3.annotation()
+    .editMode(true)
+    .notePadding(15)
+    .type(type)
+    .accessors({
+      x: d => x(parseTime(d.date)),
+      y: d => y(d.close)
+    })
+    .accessorsInverse({
+       date: d => timeFormat(x.invert(d.x)),
+       close: d => y.invert(d.y)
+    })
+    .annotations(annotations)
+
+  d3.select("svg")
+    .append("g")
+    .attr("class", "annotation-group")
+    .call(makeAnnotations)
 };
 </script>
 </html>
