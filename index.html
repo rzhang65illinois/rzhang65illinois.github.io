@@ -22,7 +22,7 @@ async function main() {
     "https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/Covid_time_series.csv",
     function(d){return { time : d3.timeParse("%m/%d/%Y")(d.time), US : +d.US }});
   const margin = {top: 30, right: 60, bottom: 30, left: 100};
-  const width = 800 - margin.left - margin.right;
+  const width = 1000 - margin.left - margin.right;
   const height = 600 - margin.top - margin.bottom;
   const svg = d3.select("body")
     .append("svg")
@@ -47,7 +47,7 @@ async function main() {
       .datum(data)
       .attr("fill", "none")
       .attr("stroke", "steelblue")
-      .attr("stroke-width", 1.5)
+      .attr("stroke-width", 3)
       .attr("d", d3.line()
         .x(function(d) { return x(d.time) })
         .y(function(d) { return y(+d.US) })
@@ -55,30 +55,52 @@ async function main() {
 
   const event = await d3.csv(
     "https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/Covid_events.csv",
-    function(d){return { time : d3.timeParse("%-d-%b-%y")(d.time), event : +d.event }});
-  console.log(event[0]);
-  const time = [array(data)]; function array(d) { return d.time; }
-  const num = [array(data)]; function array(d) { return d.US; }
+    function(d){return { time : d3.timeParse("%-d-%b-%y")(d.time), event : d.event }});
+  
+  const time = [];
+  for(var i = 0; i < data.length; i++) {
+    time.push(data[i].time)
+  }
+  const num = []; 
+  for(var i = 0; i < data.length; i++) {
+    num.push(data[i].US)
+  }
   const interp = d3.scaleLinear()
     .domain(time)
-    .range(num); 
+    .range(num);
   var circles = svg.selectAll('circle')
     .data(event).enter()
     .append('circle')
-    .attr('cx', function(d) { return interp(d.time) })
-    .attr('cy', 400)
+    .attr('cx', function(d) { return x(d.time) })
+    .attr('cy', function(d) { return y(interp(d.time)) })
     .attr('r', 5)
     .attr("fill" , "black");
+  var annotations = [
+      {
+        note: {
+          label: "Here is the annotation label 2",
+          title: "Annotation title"
+        },
+        x: 100,
+        y: 100,
+        dy: 100,
+        dx: 100
+      }
+    ]
   circles.on("mouseover", function(d) {
     d3.select(this)
       .attr("fill" , "red")
+    
+    d3.select("svg")
+      .append("g")
+      .call(makeAnnotations)
   });
   circles.on("mouseout", function(d) {
     d3.select(this)
       .attr("fill" , "black")
   });
 };
-// Features of the annotation
+
 const annotations = [
   {
     note: {
