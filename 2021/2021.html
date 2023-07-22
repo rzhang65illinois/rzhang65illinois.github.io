@@ -2,7 +2,6 @@
 
 <html>
 <script src="https://d3js.org/d3.v5.min.js"></script>
-<script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
 <button type="button" id="2021">2020</button>
 <script type="text/javascript">
     document.getElementById("2021").onclick = function () {
@@ -54,7 +53,7 @@ async function main() {
         );
 
   const event = await d3.csv(
-    "https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/Covid_events.csv",
+    "https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/2021/Covid_events_2021.csv",
     function(d){return { time : d3.timeParse("%-d-%b-%y")(d.time), event : d.event }});
   
   const time = [];
