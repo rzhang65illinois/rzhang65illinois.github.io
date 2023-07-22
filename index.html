@@ -47,7 +47,7 @@ async function main() {
       .datum(data)
       .attr("fill", "none")
       .attr("stroke", "steelblue")
-      .attr("stroke-width", 3)
+      .attr("stroke-width", 2)
       .attr("d", d3.line()
         .x(function(d) { return x(d.time) })
         .y(function(d) { return y(+d.US) })
@@ -73,51 +73,37 @@ async function main() {
     .append('circle')
     .attr('cx', function(d) { return x(d.time) })
     .attr('cy', function(d) { return y(interp(d.time)) })
-    .attr('r', 5)
-    .attr("fill" , "black");
-  var annotations = [
-      {
-        note: {
-          label: "Here is the annotation label 2",
-          title: "Annotation title"
-        },
-        x: 100,
-        y: 100,
-        dy: 100,
-        dx: 100
-      }
-    ]
+    .attr('r', 10)
+    .attr("stroke", "red")
+    .attr("stroke-width", 1)
+    .attr("stroke-dasharray", ("6,2"))
+    .attr("fill" , "rgba(255, 0, 0, 0.33)");
+  const annotations = [
+  {
+    note: { label: "Hi" },
+    x: 100,
+    y: 100,
+    dy: 137,
+    dx: 162,
+    subject: { radius: 50, radiusPadding: 10 },
+  },
+  ];
+  const makeAnnotations = d3.annotation().annotations(annotations)
+  d3.select("svg")
+    .append("g")
+    .call(makeAnnotations)
+d3.annotation().annotations(annotations);
   circles.on("mouseover", function(d) {
     d3.select(this)
-      .attr("fill" , "red")
-    
+      .attr("fill" , "rgba(255, 0, 0, 0.66)")
     d3.select("svg")
       .append("g")
       .call(makeAnnotations)
   });
   circles.on("mouseout", function(d) {
     d3.select(this)
-      .attr("fill" , "black")
+      .attr("fill" , "rgba(255, 0, 0, 0.33)")
   });
 };
-
-const annotations = [
-  {
-    note: {
-      label: "Here is the annotation label 2",
-      title: "Annotation title"
-    },
-    x: 100,
-    y: 100,
-    dy: 100,
-    dx: 100
-  }
-]
-
-// Add annotation to the chart
-const makeAnnotations = d3.annotation().annotations(annotations)
-d3.select("svg")
-  .append("g")
-  .call(makeAnnotations)
 </script>
 </html>
