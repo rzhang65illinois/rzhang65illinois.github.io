@@ -124,11 +124,26 @@ async function main() {
     g.select("#popuptext").remove()
   });
   g.append("text")
-    .text("Covid-19 Confirmed Cases")
+    .text("United States Covid-19 Confirmed Case Timeline")
     .attr("x", 400)
     .attr("y", 0)
     .attr("text-anchor", "middle")
     .attr("font-size", 20);
+  g.append("text")
+    .text("The solid line shows Covid-19 confirmed cases in the United States;")
+    .attr("x", 20)
+    .attr("y", 30)
+    .attr("font-size", 10);
+  g.append("text")
+    .text("The dash lines show Covid-19 confirmed cases in other top 10 population countries;")
+    .attr("x", 20)
+    .attr("y", 40)
+    .attr("font-size", 10);
+  g.append("text")
+    .text("The circles show milestone events during the Covid-19 pandemic.")
+    .attr("x", 20)
+    .attr("y", 50)
+    .attr("font-size", 10);
 };
 </script>
 </html>
