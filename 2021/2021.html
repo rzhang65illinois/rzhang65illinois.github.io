@@ -8,7 +8,7 @@
 <script>
 async function main() {
   const data = await d3.csv(
-    "https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/2021/Covid_time_series_2021.csv",
+    "https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/2021/Covid_time_series.csv",
     function(d){return { time : d3.timeParse("%m/%d/%Y")(d.time), US : +d.US }});
   const margin = {top: 30, right: 100, bottom: 30, left: 100};
   const width = 1000 - margin.left - margin.right;
@@ -43,7 +43,7 @@ async function main() {
         );
 
   const event = await d3.csv(
-    "https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/2021/Covid_events_2021.csv",
+    "https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/2021/Covid_events.csv",
     function(d){return { time : d3.timeParse("%-d-%b-%y")(d.time), event : d.event }});
   
   const time = [];
