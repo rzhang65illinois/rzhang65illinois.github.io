@@ -102,30 +102,3 @@ async function main() {
 </script>
 </html>
 
-  for(var i = 0; i < country.length; i++) {
-    svg.append("g")
-      .append("rect")
-      .attr("x", 800)
-      .attr("y", 400-15*i)
-      .attr('width', 25)
-      .attr('height', 10)
-      .attr('stroke', 'black')
-      .attr('fill', color[i])
-    svg.append("g")
-      .append("text")
-      .text(country[i])
-      .attr("x", 750)
-      .attr("y", 410-15*i)
-      .attr("font-size", 12)
-    svg.append("path")
-      .datum(data)
-      .attr("fill", "none")
-      .attr("stroke", color[i])
-      .attr("stroke-width", 1)
-      .attr("stroke-dasharray", ("2, 2"))
-      .attr("d", d3.line()
-        .x(function(d) { return x(d.time) })
-        .y(function(d) { return y(d[country[i]]) })
-        );
-  }
-  
