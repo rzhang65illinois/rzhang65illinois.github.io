@@ -2,7 +2,7 @@
 
 <html>
 <script src="https://d3js.org/d3.v5.min.js"></script>
-<<button onclick="window.location.href='https://rzhang65illinois.github.io';">2020</button>
+<<button onclick="window.location.href='https://rzhang65illinois.github.io/';">2020</button>
 <button onclick="window.location.href='https://rzhang65illinois.github.io/2022/2022.html';">2022</button>
 <body onload="main()">
 <script>
@@ -45,7 +45,7 @@ async function main() {
   for(var i = 0; i < country.length; i++) {
     svg.append("g")
       .append("rect")
-      .attr("x", 820)
+      .attr("x", 770)
       .attr("y", 400-15*i)
       .attr('width', 20)
       .attr('height', 10)
@@ -54,7 +54,7 @@ async function main() {
     svg.append("g")
       .append("text")
       .text(country[i])
-      .attr("x", 750)
+      .attr("x", 700)
       .attr("y", 410-15*i)
       .attr("font-size", 12)
     svg.append("path")
