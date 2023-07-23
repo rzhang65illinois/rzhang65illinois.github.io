@@ -22,6 +22,7 @@ async function main() {
     .append("g")
       .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
+
   const x = d3.scaleTime()
       .domain(d3.extent(data, function(d) { return d.time; }))
       .range([0, width]);
@@ -68,6 +69,7 @@ async function main() {
         .y(function(d) { return y(d[country[i]]) })
         );
   }
+  
   // add covid-19 events
   const event = await d3.csv(
     "https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/2022/Covid_events.csv",
@@ -123,6 +125,12 @@ async function main() {
       .attr("fill" , "rgba(255, 0, 0, 0.33)")
     g.select("#popuptext").remove()
   });
+  g.append("text")
+    .text("Covid-19 Confirmed Cases")
+    .attr("x", 400)
+    .attr("y", 0)
+    .attr("text-anchor", "middle")
+    .attr("font-size", 20);
 };
 </script>
 </html>
