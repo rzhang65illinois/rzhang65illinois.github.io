@@ -9,9 +9,9 @@
 async function main() {
   const data = await d3.csv(
     "https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/Covid_time_series.csv",
-    function(d){return { time:d3.timeParse("%m/%d/%Y")(d.time), US:+d.US, China:+d.China, India:+d.India, Indonesia:+d.Indonesia, Pakistan: +d.Pakistan }});
-  const country = ['China', 'India', 'Indonesia', 'Pakistan']
-  const color = ['red', 'green', 'blue', 'black']
+    function(d){return { time : d3.timeParse("%m/%d/%Y")(d.time), US : +d.US, China : +d.China, India : +d.India, Indonesia : +d.Indonesia, Pakistan : +d.Pakistan }});
+  const country = ['China', 'India']//, 'Indonesia', 'Pakistan']
+  const color = ['red', 'green']//, 'blue', 'black']
   const margin = {top: 30, right: 100, bottom: 30, left: 100};
   const width = 1000 - margin.left - margin.right;
   const height = 600 - margin.top - margin.bottom;
@@ -33,7 +33,6 @@ async function main() {
     .range([height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
-
   svg.append("path")
       .datum(data)
       .attr("fill", "none")
@@ -44,33 +43,7 @@ async function main() {
         .y(function(d) { return y(d.US) })
         );
   
-  for(var i = 0; i < country.length; i++) {
-    svg.append("g")
-      .append("rect")
-      .attr("x", 800)
-      .attr("y", 400-15*i)
-      .attr('width', 25)
-      .attr('height', 10)
-      .attr('stroke', 'black')
-      .attr('fill', color[i])
-    svg.append("g")
-      .append("text")
-      .text(country[i])
-      .attr("x", 750)
-      .attr("y", 410-15*i)
-      .attr("font-size", 12)
-    svg.append("g")
-      .append("path")
-      .datum(data)
-      .attr("stroke", color[i])
-      .attr("stroke-width", 1)
-      .attr("stroke-dasharray", ("2, 2"))
-      .attr("d", d3.line()
-        .x(function(d) { return x(d.time) })
-        .y(function(d) { return y(d[country[i]]) })
-        );
-  }
-  
+  // add covid-19 events
   const event = await d3.csv(
     "https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/Covid_events.csv",
     function(d){return { time : d3.timeParse("%-d-%b-%y")(d.time), event : d.event}});
@@ -88,8 +61,7 @@ async function main() {
     .range(num);
 
   var g = svg.selectAll(null)
-        .data(event)
-        .enter()
+        .data(event).enter()
         .append("g")
   const tFormat = d3.timeFormat("%b%d");
   g.append("circle")
@@ -108,6 +80,7 @@ async function main() {
     .attr("font-size", 10)
     .attr("dx", 0)
     .attr("dy", -15);
+
   g.selectAll("circle")
     .on("mouseover", function(d) {
     d3.select(this)
