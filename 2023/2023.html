@@ -2,13 +2,12 @@
 
 <html>
 <script src="https://d3js.org/d3.v5.min.js"></script>
-<button onclick="window.location.href='https://rzhang65illinois.github.io/2021/2021.html';">2021</button>
-<button onclick="window.location.href='https://rzhang65illinois.github.io/2023/2023.html';">2023</button>
+<button onclick="window.location.href='https://rzhang65illinois.github.io/2022/2022.html';">2022</button>
 <body onload="main()">
 <script>
 async function main() {
   const data = await d3.csv(
-    "https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/2022/Covid_time_series.csv",
+    "https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/2023/Covid_time_series.csv",
     function(d){return { time:d3.timeParse("%m/%d/%Y")(d.time), US:+d.US, China:+d.China, India:+d.India, Indonesia:+d.Indonesia, Pakistan:+d.Pakistan, Nigeria:+d.Nigeria, Brazil:+Brazil, Bangladesh:+Bangladesh, Russia:+Russia, Mexico:+Mexico }});
   const country = ['China','India','Indonesia','Pakistan','Nigeria','Brazil','Bangladesh','Russia','Mexico']
   const color = ['red','green','blue','gold','black','brown','orange','cyan','maroon']
@@ -70,7 +69,7 @@ async function main() {
   }
   // add covid-19 events
   const event = await d3.csv(
-    "https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/2022/Covid_events.csv",
+    "https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/2023/Covid_events.csv",
     function(d){return { time : d3.timeParse("%-d-%b-%y")(d.time), event : d.event}});
   
   const time = [];

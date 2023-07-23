@@ -2,14 +2,16 @@
 
 <html>
 <script src="https://d3js.org/d3.v5.min.js"></script>
-<button onclick="window.location.href='https://rzhang65illinois.github.io';">2021</button>
+<<button onclick="window.location.href='https://rzhang65illinois.github.io/2020/2020.html';">2020</button>
 <button onclick="window.location.href='https://rzhang65illinois.github.io/2022/2022.html';">2022</button>
 <body onload="main()">
 <script>
 async function main() {
   const data = await d3.csv(
     "https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/2021/Covid_time_series.csv",
-    function(d){return { time : d3.timeParse("%m/%d/%Y")(d.time), US : +d.US }});
+    function(d){return { time:d3.timeParse("%m/%d/%Y")(d.time), US:+d.US, China:+d.China, India:+d.India, Indonesia:+d.Indonesia, Pakistan:+d.Pakistan, Nigeria:+d.Nigeria, Brazil:+Brazil, Bangladesh:+Bangladesh, Russia:+Russia, Mexico:+Mexico }});
+  const country = ['China','India','Indonesia','Pakistan','Nigeria','Brazil','Bangladesh','Russia','Mexico']
+  const color = ['red','green','blue','gold','black','brown','orange','cyan','maroon']
   const margin = {top: 30, right: 100, bottom: 30, left: 100};
   const width = 1000 - margin.left - margin.right;
   const height = 600 - margin.top - margin.bottom;
@@ -31,7 +33,6 @@ async function main() {
     .range([height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
-
   svg.append("path")
       .datum(data)
       .attr("fill", "none")
@@ -39,12 +40,38 @@ async function main() {
       .attr("stroke-width", 2)
       .attr("d", d3.line()
         .x(function(d) { return x(d.time) })
-        .y(function(d) { return y(+d.US) })
+        .y(function(d) { return y(d.US) })
         );
-
+  for(var i = 0; i < country.length; i++) {
+    svg.append("g")
+      .append("rect")
+      .attr("x", 800)
+      .attr("y", 400-15*i)
+      .attr('width', 25)
+      .attr('height', 10)
+      .attr('stroke', 'black')
+      .attr('fill', color[i])
+    svg.append("g")
+      .append("text")
+      .text(country[i])
+      .attr("x", 750)
+      .attr("y", 410-15*i)
+      .attr("font-size", 12)
+    svg.append("path")
+      .datum(data)
+      .attr("fill", "none")
+      .attr("stroke", color[i])
+      .attr("stroke-width", 1)
+      .attr("stroke-dasharray", ("2, 2"))
+      .attr("d", d3.line()
+        .x(function(d) { return x(d.time) })
+        .y(function(d) { return y(d[country[i]]) })
+        );
+  }
+  // add covid-19 events
   const event = await d3.csv(
     "https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/2021/Covid_events.csv",
-    function(d){return { time : d3.timeParse("%-d-%b-%y")(d.time), event : d.event }});
+    function(d){return { time : d3.timeParse("%-d-%b-%y")(d.time), event : d.event}});
   
   const time = [];
   for(var i = 0; i < data.length; i++) {
@@ -59,10 +86,9 @@ async function main() {
     .range(num);
 
   var g = svg.selectAll(null)
-        .data(event)
-        .enter()
+        .data(event).enter()
         .append("g")
-  const tFormat = d3.timeFormat("%d %B");
+  const tFormat = d3.timeFormat("%b%d");
   g.append("circle")
     .attr('cx', function(d) { return x(d.time) })
     .attr('cy', function(d) { return y(interp(d.time)) })
@@ -76,15 +102,7 @@ async function main() {
     .attr("x", function(d) { return x(d.time) })
     .attr("y", function(d) { return y(interp(d.time)) })
     .attr("text-anchor", "middle")
-    .attr("font-size", 12)
-    .attr("dx", 0)
-    .attr("dy", -30);
-  g.append("text")
-    .text(function(d) { return d.event })
-    .attr("x", function(d) { return x(d.time) })
-    .attr("y", function(d) { return y(interp(d.time)) })
-    .attr("text-anchor", "middle")
-    .attr("font-size", 14)
+    .attr("font-size", 10)
     .attr("dx", 0)
     .attr("dy", -15);
 
@@ -92,13 +110,19 @@ async function main() {
     .on("mouseover", function(d) {
     d3.select(this)
       .attr("fill" , "rgba(255, 0, 0, 0.66)")
+    g.append("text")
+      .attr("id", "popuptext")
+      .text(d.event + ' (Confirmed cases: ' + interp(d.time) + ' )')
+      .attr("font-size", 16)
+      .attr("x", 150)
+      .attr("y", 200);
   });
   g.selectAll("circle")
     .on("mouseout", function(d) {
     d3.select(this)
       .attr("fill" , "rgba(255, 0, 0, 0.33)")
+    g.select("#popuptext").remove()
   });
 };
 </script>
 </html>
-
