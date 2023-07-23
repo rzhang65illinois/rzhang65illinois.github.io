@@ -32,6 +32,7 @@ async function main() {
     .range([height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
+  // add confirmed cases in US
   svg.append("path")
       .datum(data)
       .attr("fill", "none")
@@ -41,6 +42,7 @@ async function main() {
         .x(function(d) { return x(d.time) })
         .y(function(d) { return y(d.US) })
         );
+  // add confirmed cases in top 10 population countries 
   for(var i = 0; i < country.length; i++) {
     svg.append("g")
       .append("rect")
@@ -67,7 +69,7 @@ async function main() {
         .y(function(d) { return y(d[country[i]]) })
         );
   }
-  // add covid-19 events
+  // add covid-19 milestones
   const event = await d3.csv(
     "https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/Covid_events.csv",
     function(d){return { time : d3.timeParse("%-d-%b-%y")(d.time), event : d.event}});
@@ -104,7 +106,7 @@ async function main() {
     .attr("font-size", 10)
     .attr("dx", 0)
     .attr("dy", -15);
-
+  // add additional descriptions of milestones
   g.selectAll("circle")
     .on("mouseover", function(d) {
     d3.select(this)
