@@ -9,7 +9,7 @@
 async function main() {
   const data = await d3.csv(
     "https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/2022/Covid_time_series.csv",
-    function(d){return { time:d3.timeParse("%m/%d/%Y")(d.time), US:+d.US, China:+d.China, India:+d.India, Indonesia:+d.Indonesia, Pakistan:+d.Pakistan, Nigeria:+d.Nigeria, Brazil:+Brazil, Bangladesh:+Bangladesh, Russia:+Russia, Mexico:+Mexico }});
+    function(d){return { time:d3.timeParse("%m/%d/%Y")(d.time), US:+d.US, China:+d.China, India:+d.India, Indonesia:+d.Indonesia, Pakistan:+d.Pakistan, Nigeria:+d.Nigeria, Brazil:+d.Brazil, Bangladesh:+d.Bangladesh, Russia:+d.Russia, Mexico:+d.Mexico }});
   const country = ['China','India','Indonesia','Pakistan','Nigeria','Brazil','Bangladesh','Russia','Mexico']
   const color = ['red','green','blue','gold','black','brown','orange','cyan','maroon']
   const margin = {top: 30, right: 100, bottom: 30, left: 100};
