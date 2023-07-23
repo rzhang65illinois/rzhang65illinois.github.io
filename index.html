@@ -3,7 +3,6 @@
 <html>
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
-<button type="button" id="2021">2021</button>
 <button onclick="window.location.href='https://rzhang65illinois.github.io/2021/2021.html';">2021</button>
 <body onload="main()">
 <script>
@@ -45,7 +44,7 @@ async function main() {
 
   const event = await d3.csv(
     "https://raw.githubusercontent.com/rzhang65illinois/rzhang65illinois.github.io/main/Covid_events.csv",
-    function(d){return { time : d3.timeParse("%-d-%b-%y")(d.time), event : d.event }});
+    function(d){return { time : d3.timeParse("%-d-%b-%y")(d.time), event : d.event, news : d.news }});
   
   const time = [];
   for(var i = 0; i < data.length; i++) {
@@ -93,11 +92,17 @@ async function main() {
     .on("mouseover", function(d) {
     d3.select(this)
       .attr("fill" , "rgba(255, 0, 0, 0.66)")
+    g.append("text")
+      .attr("id", "popuptext")
+      .text(d.news)
+      .attr("x", 50 )
+      .attr("y", 250 )
   });
   g.selectAll("circle")
     .on("mouseout", function(d) {
     d3.select(this)
       .attr("fill" , "rgba(255, 0, 0, 0.33)")
+    g.select("#popuptext").remove()
   });
 };
 </script>
